@@ -2,6 +2,9 @@ import { createGenerator, escapeSelector } from './core/index.js'
 import presetMini from './preset-mini/index.mjs'
 
 const uno = createGenerator({
+  blocklist: [
+    'p-16'
+  ],
   presets: [
     presetMini({ dark: 'media', variablePrefix: 'f-' })
   ],
@@ -18,5 +21,5 @@ const uno = createGenerator({
   }
 })
 
-const { css } = await uno.generate(['dark:bg-white', 'text-a-b-d', 'text-a-b-c', 'text-a-camel-case'], { preflights: false })
-console.log(css)
+const result = await uno.generate(['p-16', 'dark:bg-white', 'text-a-b-d', 'text-a-b-c', 'text-a-camel-case'], { preflights: false })
+console.log(result, result.css)

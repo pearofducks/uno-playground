@@ -1,0 +1,10 @@
+import type { CSSEntries, CSSObject, CSSValue, DeepPartial, Rule, Shortcut, StaticRule, StaticShortcut } from '../types';
+export declare function normalizeCSSEntries(obj: string | CSSEntries | CSSObject): string | CSSEntries;
+export declare function normalizeCSSValues(obj: CSSValue | string | (CSSValue | string)[]): (string | CSSEntries)[];
+export declare function clearIdenticalEntries(entry: CSSEntries): CSSEntries;
+export declare function entriesToCss(arr?: CSSEntries): string;
+export declare function isObject(item: any): item is Record<string, any>;
+export declare function mergeDeep<T>(original: T, patch: DeepPartial<T>): T;
+export declare function clone<T>(val: T): T;
+export declare function isStaticRule(rule: Rule): rule is StaticRule;
+export declare function isStaticShortcut(sc: Shortcut): sc is StaticShortcut;
