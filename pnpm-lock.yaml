@@ -1,0 +1,15 @@
+lockfileVersion: 5.4
+
+importers:
+
+  .:
+    specifiers: {}
+
+  core:
+    specifiers: {}
+
+  preset-mini:
+    specifiers:
+      '@unocss/core': workspace:*
+    dependencies:
+      '@unocss/core': link:../core

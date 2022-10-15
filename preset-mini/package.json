@@ -1,15 +1,16 @@
 {
-  "name": "uno-play",
+  "name": "@unocss/preset-mini",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
-  "private": true,
-  "packageManager": "pnpm@7.11.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@unocss/core": "workspace:*"
+  }
 }
