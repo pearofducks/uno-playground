@@ -30,7 +30,7 @@ const presetMini = (options = {}) => {
     rules,
     variants: variants(options),
     options,
-    postprocess: options.variablePrefix && options.variablePrefix !== "un-" ? VarPrefixPostprocessor(options.variablePrefix) : void 0,
+    postprocess: options.variablePrefix && options.variablePrefix !== "un-" ? VarPrefixPostprocessor(options.variablePrefix) : undefined,
     preflights: options.preflight ? preflights : [],
     prefix: options.prefix
   };

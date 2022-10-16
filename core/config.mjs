@@ -9,7 +9,7 @@ export function resolveShortcuts(shortcuts) {
   });
 }
 export function resolvePreset(preset) {
-  const shortcuts = preset.shortcuts ? resolveShortcuts(preset.shortcuts) : void 0;
+  const shortcuts = preset.shortcuts ? resolveShortcuts(preset.shortcuts) : undefined;
   preset.shortcuts = shortcuts;
   if (preset.prefix || preset.layer) {
     const apply = (i) => {
@@ -52,7 +52,7 @@ export function resolveConfig(userConfig = {}, defaults = {}) {
     if (isStaticRule(rule)) {
       const prefix = rule[2]?.prefix || "";
       rulesStaticMap[prefix + rule[0]] = [i, rule[1], rule[2], rule];
-      return void 0;
+      return undefined;
     }
     return [i, ...rule];
   }).filter(Boolean).reverse();

@@ -59,14 +59,11 @@ export class UnoGenerator {
     return context;
   }
   async parseToken(raw, alias) {
-    if (this.blocked.has(raw))
-      return;
+    if (this.blocked.has(raw)) return;
     const cacheKey = `${raw}${alias ? ` ${alias}` : ""}`;
-    if (this._cache.has(cacheKey))
-      return this._cache.get(cacheKey);
+    if (this._cache.has(cacheKey)) return this._cache.get(cacheKey);
     let current = raw;
-    for (const p of this.config.preprocess)
-      current = p(raw);
+    for (const p of this.config.preprocess) current = p(raw);
     if (this.isBlocked(current)) {
       this.blocked.add(raw);
       this._cache.set(cacheKey, null);
@@ -95,11 +92,12 @@ export class UnoGenerator {
       scope,
       preflights = true,
       safelist = true,
+      blocklist = false,
       minify = false
     } = options;
     const tokens = isString(input) ? await this.applyExtractors(input, id) : Array.isArray(input) ? new Set(input) : input;
-    if (safelist)
-      this.config.safelist.forEach((s) => tokens.add(s));
+    if (safelist) this.config.safelist.forEach((s) => tokens.add(s));
+    if (blocklist) this.config.blocklist.forEach((s) => tokens.delete(s));
     const nl = minify ? "" : "\n";
     const layerSet = /* @__PURE__ */ new Set([LAYER_DEFAULT]);
     const matched = /* @__PURE__ */ new Set();
@@ -168,7 +166,7 @@ export class UnoGenerator {
           ];
         });
         if (!sorted.length)
-          return void 0;
+          return undefined;
         const rules = sorted.reverse().map(([selectorSortPair, body, noMerge], idx) => {
           if (!noMerge && this.config.mergeSelectors) {
             for (let i = idx + 1; i < size; i++) {
@@ -246,7 +244,7 @@ export class UnoGenerator {
     const handler = [...variantHandlers].sort((a, b) => (a.order || 0) - (b.order || 0)).reverse().reduce(
       (previous, v) => (input) => {
         const entries = v.body?.(input.entries) || input.entries;
-        const parents = Array.isArray(v.parent) ? v.parent : [v.parent, void 0];
+        const parents = Array.isArray(v.parent) ? v.parent : [v.parent, undefined];
         return (v.handle ?? defaultVariantHandler)({
           ...input,
           entries,
@@ -288,7 +286,7 @@ export class UnoGenerator {
     const normalizedBody = normalizeCSSEntries(body);
     if (isString(normalizedBody))
       return normalizedBody;
-    const { selector, entries, parent } = this.applyVariants([0, overrideSelector || context.rawSelector, normalizedBody, void 0, context.variantHandlers]);
+    const { selector, entries, parent } = this.applyVariants([0, overrideSelector || context.rawSelector, normalizedBody, undefined, context.variantHandlers]);
     const cssBody = `${selector}{${entriesToCss(entries)}}`;
     if (parent)
       return `${parent}{${cssBody}}`;
@@ -346,7 +344,7 @@ export class UnoGenerator {
     if (!parsed)
       return;
     if (isRawUtil(parsed))
-      return [parsed[0], void 0, parsed[1], void 0, parsed[2], this.config.details ? context : void 0, void 0];
+      return [parsed[0], undefined, parsed[1], undefined, parsed[2], this.config.details ? context : undefined, undefined];
     const { selector, entries, parent, layer: variantLayer, sort: variantSort, noMerge } = this.applyVariants(parsed);
     const body = entriesToCss(entries);
     if (!body)
@@ -357,7 +355,7 @@ export class UnoGenerator {
       layer: variantLayer ?? metaLayer,
       sort: variantSort ?? metaSort
     };
-    return [parsed[0], selector, body, parent, ruleMeta, this.config.details ? context : void 0, noMerge];
+    return [parsed[0], selector, body, parent, ruleMeta, this.config.details ? context : undefined, noMerge];
   }
   expandShortcut(input, context, depth = 5) {
     if (depth === 0)
@@ -401,14 +399,14 @@ export class UnoGenerator {
     if (!result)
       return;
     return [
-      result.flatMap((r) => (isString(r) ? this.expandShortcut(r, context, depth - 1)?.[0] : void 0) || [r]).filter(Boolean),
+      result.flatMap((r) => (isString(r) ? this.expandShortcut(r, context, depth - 1)?.[0] : undefined) || [r]).filter(Boolean),
       meta
     ];
   }
   async stringifyShortcuts(parent, context, expanded, meta = { layer: this.config.shortcutsLayer }) {
     const selectorMap = new TwoKeyMap();
     const parsed = (await Promise.all(uniq(expanded).map(async (i) => {
-      const result = isString(i) ? await this.parseUtil(i, context, true) : [[Infinity, "{inline}", normalizeCSSEntries(i), void 0, []]];
+      const result = isString(i) ? await this.parseUtil(i, context, true) : [[Infinity, "{inline}", normalizeCSSEntries(i), undefined, []]];
       if (!result)
         warnOnce(`unmatched utility "${i}" in shortcut "${parent[1]}"`);
       return result || [];
@@ -417,7 +415,7 @@ export class UnoGenerator {
     const rawStringfieldUtil = [];
     for (const item of parsed) {
       if (isRawUtil(item)) {
-        rawStringfieldUtil.push([item[0], void 0, item[1], void 0, item[2], context, void 0]);
+        rawStringfieldUtil.push([item[0], undefined, item[1], undefined, item[2], context, undefined]);
         continue;
       }
       const { selector, entries, parent: parent2, sort, noMerge } = this.applyVariants(item, [...item[4], ...parentVariants], raw);
@@ -431,8 +429,8 @@ export class UnoGenerator {
         return (flatten ? [entriesList.flat(1)] : entriesList).map((entries) => {
           const body = entriesToCss(entries);
           if (body)
-            return [index, selector, body, joinedParents, { ...meta, noMerge, sort: maxSort }, context, void 0];
-          return void 0;
+            return [index, selector, body, joinedParents, { ...meta, noMerge, sort: maxSort }, context, undefined];
+          return undefined;
         });
       };
       const merges = [

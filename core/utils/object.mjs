@@ -28,7 +28,7 @@ export function clearIdenticalEntries(entry) {
 export function entriesToCss(arr) {
   if (arr == null)
     return "";
-  return clearIdenticalEntries(arr).map(([key, value]) => value != null ? `${key}:${value};` : void 0).filter(Boolean).join("");
+  return clearIdenticalEntries(arr).map(([key, value]) => value != null ? `${key}:${value};` : undefined).filter(Boolean).join("");
 }
 export function isObject(item) {
   return item && typeof item === "object" && !Array.isArray(item);
