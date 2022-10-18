@@ -220,23 +220,18 @@ export class UnoGenerator {
     while (true) {
       applied = false;
       for (const v of this.config.variants) {
-        if (!v.multiPass && variants.has(v))
-          continue;
+        if (!v.multiPass && variants.has(v)) continue;
         let handler = v.match(processed, context);
-        if (!handler)
-          continue;
-        if (isString(handler))
-          handler = { matcher: handler };
+        if (!handler) continue;
+        if (isString(handler)) handler = { matcher: handler };
         processed = handler.matcher;
         handlers.unshift(handler);
         variants.add(v);
         applied = true;
         break;
       }
-      if (!applied)
-        break;
-      if (handlers.length > 500)
-        throw new Error(`Too many variants applied to "${raw}"`);
+      if (!applied) break;
+      if (handlers.length > 500) throw new Error(`Too many variants applied to "${raw}"`);
     }
     return [raw, processed, handlers, variants];
   }
@@ -264,8 +259,7 @@ export class UnoGenerator {
       entries: parsed[2]
     });
     const { parent, parentOrder } = variantContextResult;
-    if (parent != null && parentOrder != null)
-      this.parentOrders.set(parent, parentOrder);
+    if (parent != null && parentOrder != null) this.parentOrders.set(parent, parentOrder);
     const obj = {
       selector: movePseudoElementsEnd([
         variantContextResult.prefix,
@@ -278,36 +272,29 @@ export class UnoGenerator {
       sort: variantContextResult.sort,
       noMerge: variantContextResult.noMerge
     };
-    for (const p of this.config.postprocess)
-      p(obj);
+    for (const p of this.config.postprocess) p(obj);
     return obj;
   }
   constructCustomCSS(context, body, overrideSelector) {
     const normalizedBody = normalizeCSSEntries(body);
-    if (isString(normalizedBody))
-      return normalizedBody;
+    if (isString(normalizedBody)) return normalizedBody;
     const { selector, entries, parent } = this.applyVariants([0, overrideSelector || context.rawSelector, normalizedBody, undefined, context.variantHandlers]);
     const cssBody = `${selector}{${entriesToCss(entries)}}`;
-    if (parent)
-      return `${parent}{${cssBody}}`;
+    if (parent) return `${parent}{${cssBody}}`;
     return cssBody;
   }
   async parseUtil(input, context, internal = false) {
     const [raw, processed, variantHandlers] = isString(input) ? this.matchVariants(input) : input;
-    if (this.config.details)
-      context.rules = context.rules ?? [];
+    if (this.config.details) context.rules = context.rules ?? [];
     const staticMatch = this.config.rulesStaticMap[processed];
     if (staticMatch) {
       if (staticMatch[1] && (internal || !staticMatch[2]?.internal)) {
-        if (this.config.details)
-          context.rules.push(staticMatch[3]);
+        if (this.config.details) context.rules.push(staticMatch[3]);
         const index = staticMatch[0];
         const entry = normalizeCSSEntries(staticMatch[1]);
         const meta = staticMatch[2];
-        if (isString(entry))
-          return [[index, entry, meta]];
-        else
-          return [[index, raw, entry, meta, variantHandlers]];
+        if (isString(entry)) return [[index, entry, meta]];
+        else return [[index, raw, entry, meta, variantHandlers]];
       }
     }
     context.variantHandlers = variantHandlers;

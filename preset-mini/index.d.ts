@@ -1,13 +1,10 @@
-import { Preflight, PresetOptions, Preset } from '@unocss/core';
-export { c as colors } from './colors-67ae184f.js';
-export { t as theme } from './default-016bd463.js';
-import { T as Theme } from './types-c22910b5.js';
-export { T as Theme, a as ThemeAnimation } from './types-c22910b5.js';
-export { p as parseColor } from './utilities-d1833377.js';
-
-declare const preflights: Preflight[];
-
-interface DarkModeSelectors {
+import type { Preset, PresetOptions } from '@unocss/core';
+import type { Theme, ThemeAnimation } from './theme';
+export { preflights } from './preflights';
+export { theme, colors } from './theme';
+export { parseColor } from './utils';
+export type { ThemeAnimation, Theme };
+export interface DarkModeSelectors {
     /**
      * Selector for light variant.
      *
@@ -21,7 +18,7 @@ interface DarkModeSelectors {
      */
     dark?: string;
 }
-interface PresetMiniOptions extends PresetOptions {
+export interface PresetMiniOptions extends PresetOptions {
     /**
      * Dark mode options
      *
@@ -53,6 +50,5 @@ interface PresetMiniOptions extends PresetOptions {
      */
     preflight?: boolean;
 }
-declare const presetMini: (options?: PresetMiniOptions) => Preset<Theme>;
-
-export { DarkModeSelectors, PresetMiniOptions, presetMini as default, preflights, presetMini };
+export declare const presetMini: (options?: PresetMiniOptions) => Preset<Theme>;
+export default presetMini;

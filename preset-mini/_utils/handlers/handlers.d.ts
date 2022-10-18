@@ -1,0 +1,17 @@
+export declare function numberWithUnit(str: string): string;
+export declare function auto(str: string): string;
+export declare function rem(str: string): string;
+export declare function px(str: string): string;
+export declare function number(str: string): string;
+export declare function percent(str: string): string;
+export declare function fraction(str: string): string;
+export declare function bracket(str: string): string;
+export declare function bracketOfColor(str: string): string;
+export declare function bracketOfLength(str: string): string;
+export declare function bracketOfPosition(str: string): string;
+export declare function cssvar(str: string): string;
+export declare function time(str: string): string;
+export declare function degree(str: string): string;
+export declare function global(str: string): string;
+export declare function properties(str: string): string;
+export declare function position(str: string): string;

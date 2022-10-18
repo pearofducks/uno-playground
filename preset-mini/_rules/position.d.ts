@@ -1,0 +1,10 @@
+import type { Rule } from '@unocss/core';
+export declare const positions: Rule[];
+export declare const justifies: Rule[];
+export declare const orders: Rule[];
+export declare const alignments: Rule[];
+export declare const placements: Rule[];
+export declare const insets: Rule[];
+export declare const floats: Rule[];
+export declare const zIndexes: Rule[];
+export declare const boxSizing: Rule[];

@@ -1,26 +1,11 @@
-import { entriesToCss } from '@unocss/core';
-import './shared/preset-mini.7c9c225a.mjs';
-export { p as parseColor } from './shared/preset-mini.7d4b2219.mjs';
-import { r as rules } from './shared/preset-mini.389e54ff.mjs';
-export { c as colors } from './shared/preset-mini.65ac75be.mjs';
-import { t as theme } from './shared/preset-mini.b0834387.mjs';
-export { t as theme } from './shared/preset-mini.b0834387.mjs';
-import { v as variants } from './shared/preset-mini.f7d1cea8.mjs';
-import './shared/preset-mini.f73f9ed7.mjs';
-
-const preflights = [
-  {
-    layer: "preflights",
-    getCSS(ctx) {
-      if (ctx.theme.preflightBase) {
-        const css = entriesToCss(Object.entries(ctx.theme.preflightBase));
-        return `*,::before,::after{${css}}::backdrop{${css}}`;
-      }
-    }
-  }
-];
-
-const presetMini = (options = {}) => {
+import { preflights } from "./preflights.mjs";
+import { rules } from "./rules.mjs";
+import { theme } from "./theme.mjs";
+import { variants } from "./variants.mjs";
+export { preflights } from "./preflights.mjs";
+export { theme, colors } from "./theme.mjs";
+export { parseColor } from "./utils.mjs";
+export const presetMini = (options = {}) => {
   options.dark = options.dark ?? "class";
   options.attributifyPseudo = options.attributifyPseudo ?? false;
   options.preflight = options.preflight ?? true;
@@ -30,11 +15,12 @@ const presetMini = (options = {}) => {
     rules,
     variants: variants(options),
     options,
-    postprocess: options.variablePrefix && options.variablePrefix !== "un-" ? VarPrefixPostprocessor(options.variablePrefix) : undefined,
+    postprocess: options.variablePrefix && options.variablePrefix !== "un-" ? VarPrefixPostprocessor(options.variablePrefix) : void 0,
     preflights: options.preflight ? preflights : [],
     prefix: options.prefix
   };
 };
+export default presetMini;
 function VarPrefixPostprocessor(prefix) {
   return (obj) => {
     obj.entries.forEach((i) => {
@@ -44,5 +30,3 @@ function VarPrefixPostprocessor(prefix) {
     });
   };
 }
-
-export { presetMini as default, preflights, presetMini };
