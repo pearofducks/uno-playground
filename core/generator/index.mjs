@@ -300,29 +300,23 @@ export class UnoGenerator {
     context.variantHandlers = variantHandlers;
     const { rulesDynamic } = this.config;
     for (const [i, matcher, handler, meta] of rulesDynamic) {
-      if (meta?.internal && !internal)
-        continue;
+      if (meta?.internal && !internal) continue;
       let unprefixed = processed;
       if (meta?.prefix) {
-        if (!processed.startsWith(meta.prefix))
-          continue;
+        if (!processed.startsWith(meta.prefix)) continue;
         unprefixed = processed.slice(meta.prefix.length);
       }
       const match = unprefixed.match(matcher);
-      if (!match)
-        continue;
+      console.log("MATCH", unprefixed, matcher, match)
+      if (!match) continue;
       const result = await handler(match, context);
-      if (!result)
-        continue;
-      if (this.config.details)
-        context.rules.push([matcher, handler, meta]);
+      if (!result) continue;
+      if (this.config.details) context.rules.push([matcher, handler, meta]);
       const entries = normalizeCSSValues(result).filter((i2) => i2.length);
       if (entries.length) {
         return entries.map((e2) => {
-          if (isString(e2))
-            return [i, e2, meta];
-          else
-            return [i, raw, e2, meta, variantHandlers];
+          if (isString(e2)) return [i, e2, meta];
+          else return [i, raw, e2, meta, variantHandlers];
         });
       }
     }
