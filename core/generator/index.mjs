@@ -108,7 +108,7 @@ export class UnoGenerator {
       scope,
       preflights = true,
       safelist = true,
-      blocklist = true,
+      unsafelist = true,
       minify = false
     } = options;
 
@@ -119,7 +119,7 @@ export class UnoGenerator {
         : input;
 
     if (safelist) this.config.safelist.forEach((s) => tokens.add(s));
-    if (blocklist) this.config.blocklist.forEach((s) => tokens.delete(s));
+    if (unsafelist) this.config.unsafelist.forEach((s) => tokens.delete(s));
 
     const nl = minify ? "" : "\n";
 
@@ -327,7 +327,6 @@ export class UnoGenerator {
 
   async parseUtil(input, context, internal = false) {
     const [raw, processed, variantHandlers] = isString(input) ? this.matchVariants(input) : input;
-    // console.log({ raw, processed, variantHandlers })
     if (this.config.details) context.rules = context.rules ?? [];
     const staticMatch = this.config.rulesStaticMap[processed];
     if (staticMatch) {
@@ -350,7 +349,6 @@ export class UnoGenerator {
         unprefixed = processed.slice(meta.prefix.length);
       }
       const match = unprefixed.match(matcher);
-      // console.log("MATCH", unprefixed, matcher, match)
       if (!match) continue;
       const result = await handler(match, context);
       if (!result) continue;
@@ -426,9 +424,10 @@ export class UnoGenerator {
   async stringifyShortcuts(parent, context, expanded, meta = { layer: this.config.shortcutsLayer }) {
     const selectorMap = new TwoKeyMap();
     const parsed = (await Promise.all(uniq(expanded).map(async (i) => {
-      const result = isString(i) ? await this.parseUtil(i, context, true) : [[Infinity, "{inline}", normalizeCSSEntries(i), undefined, []]];
-      if (!result)
-        warnOnce(`unmatched utility "${i}" in shortcut "${parent[1]}"`);
+      const result = isString(i)
+        ? await this.parseUtil(i, context, true)
+        : [[Infinity, "{inline}", normalizeCSSEntries(i), undefined, []]];
+      if (!result) warnOnce(`unmatched utility "${i}" in shortcut "${parent[1]}"`);
       return result || [];
     }))).flat(1).filter(Boolean).sort((a, b) => a[0] - b[0]);
     const [raw, , parentVariants] = parent;

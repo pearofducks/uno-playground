@@ -16,7 +16,7 @@ export const presetMini = (options = {}) => {
   return {
     name: "@unocss/preset-mini",
     safelist: options.base ? base : [],
-    blocklist: options.jit ? base : [],
+    unsafelist: options.jit ? base : [],
     theme,
     rules,
     variants: variants(options),
