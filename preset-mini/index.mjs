@@ -11,6 +11,8 @@ export const presetMini = (options = {}) => {
   options.preflight = options.preflight ?? true;
   return {
     name: "@unocss/preset-mini",
+    safelist: ['p-32'],
+    blocklist: ['p-8'],
     theme,
     rules,
     variants: variants(options),

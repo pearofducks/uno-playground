@@ -86,6 +86,7 @@ export function resolveConfig(userConfig = {}, defaults = {}) {
     variants: mergePresets("variants").map(normalizeVariant),
     shortcuts: resolveShortcuts(mergePresets("shortcuts")),
     extractors,
-    safelist: mergePresets("safelist")
+    safelist: mergePresets("safelist"),
+    blocklist: mergePresets("blocklist")
   };
 }
