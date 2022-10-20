@@ -5,6 +5,9 @@ import { variants } from "./variants.mjs";
 export { preflights } from "./preflights.mjs";
 export { theme, colors } from "./theme.mjs";
 export { parseColor } from "./utils.mjs";
+import { isStaticRule } from '@unocss/core'
+
+for (const r of rules) if (isStaticRule(r)) console.log(r)
 
 export const presetMini = (options = {}) => {
   options.dark = options.dark ?? "media";
@@ -51,7 +54,7 @@ const makeResponsive = arr => map(Object.keys(theme.breakpoints), arr, ':')
 function buildBase() {
   const list = []
   const colors = colorNames()
-  const colorClasses = map(['bg', 'text'], colors)
+  const colorClasses = map(['bg', 'text', 'border'], colors)
   const spacingDirections = ['', 'b','l','t','r','x','y']
   const spacingTypes = map(['p','m'], spacingDirections,'')
   const spacings = map(spacingTypes, Object.keys(theme.spacing))

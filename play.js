@@ -8,5 +8,5 @@ const uno = createGenerator({
 })
 
 // const result = await uno.generate('', { preflights: false })
-const result = await uno.generate(['sm:bg-blue-600', 'sm:p-16'])
+const result = await uno.generate(['sm:bg-blue-600', 'sm:p-16', 'some-fantastic-llama'])
 console.log(result.css)

@@ -100,17 +100,17 @@ export const insets = [
   [/^(?:position-|pos-)?inset-([bi][se])-(.+)$/, handleInsetValues],
   [/^(?:position-|pos-)?(top|left|right|bottom)-(.+)$/, ([, d, v], ctx) => ({ [d]: handleInsetValue(v, ctx) })]
 ];
-export const floats = [
-  ["float-left", { float: "left" }],
-  ["float-right", { float: "right" }],
-  ["float-none", { float: "none" }],
-  ...makeGlobalStaticRules("float"),
-  ["clear-left", { clear: "left" }],
-  ["clear-right", { clear: "right" }],
-  ["clear-both", { clear: "both" }],
-  ["clear-none", { clear: "none" }],
-  ...makeGlobalStaticRules("clear")
-];
+// export const floats = [
+//   ["float-left", { float: "left" }],
+//   ["float-right", { float: "right" }],
+//   ["float-none", { float: "none" }],
+//   ...makeGlobalStaticRules("float"),
+//   ["clear-left", { clear: "left" }],
+//   ["clear-right", { clear: "right" }],
+//   ["clear-both", { clear: "both" }],
+//   ["clear-none", { clear: "none" }],
+//   ...makeGlobalStaticRules("clear")
+// ];
 export const zIndexes = [
   [/^z([\d.]+)$/, ([, v]) => ({ "z-index": h.number(v) })],
   [/^z-(.+)$/, ([, v]) => ({ "z-index": h.bracket.cssvar.global.auto.number(v) }), { autocomplete: "z-<num>" }]
