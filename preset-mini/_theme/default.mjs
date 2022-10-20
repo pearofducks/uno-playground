@@ -1,9 +1,10 @@
 import { colors } from "./colors.mjs";
-import { fontFamily, fontSize, letterSpacing, lineHeight, textIndent, textShadow, textStrokeWidth, wordSpacing } from "./font.mjs";
+import { fontFamily, fontSize } from "./font.mjs";
 import { borderRadius, boxShadow, breakpoints, duration, easing, lineWidth, ringWidth, spacing, verticalBreakpoints } from "./misc.mjs";
-import { blur, dropShadow } from "./filters.mjs";
+// import { blur, dropShadow } from "./filters.mjs";
 import { height, maxHeight, maxWidth, width } from "./size.mjs";
 import { preflightBase } from "./preflight.mjs";
+
 export const theme = {
   width,
   height,
@@ -23,15 +24,15 @@ export const theme = {
   breakpoints,
   verticalBreakpoints,
   borderRadius,
-  lineHeight,
-  letterSpacing,
-  wordSpacing,
+  // lineHeight,
+  // letterSpacing,
+  // wordSpacing,
   boxShadow,
-  textIndent,
-  textShadow,
-  textStrokeWidth,
-  blur,
-  dropShadow,
+  // textIndent,
+  // textShadow,
+  // textStrokeWidth,
+  // blur,
+  // dropShadow,
   easing,
   lineWidth,
   spacing,

@@ -108,7 +108,7 @@ export class UnoGenerator {
       scope,
       preflights = true,
       safelist = true,
-      blocklist = false,
+      blocklist = true,
       minify = false
     } = options;
 
@@ -327,7 +327,7 @@ export class UnoGenerator {
 
   async parseUtil(input, context, internal = false) {
     const [raw, processed, variantHandlers] = isString(input) ? this.matchVariants(input) : input;
-    console.log({ raw, processed, variantHandlers })
+    // console.log({ raw, processed, variantHandlers })
     if (this.config.details) context.rules = context.rules ?? [];
     const staticMatch = this.config.rulesStaticMap[processed];
     if (staticMatch) {

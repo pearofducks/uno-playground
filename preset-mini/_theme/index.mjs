@@ -5,4 +5,3 @@ export * from "./font.mjs";
 export * from "./misc.mjs";
 export * from "./size.mjs";
 export * from "./preflight.mjs";
-export * from "./types.mjs";

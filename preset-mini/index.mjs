@@ -1,18 +1,22 @@
 import { preflights } from "./preflights.mjs";
 import { rules } from "./rules.mjs";
-import { theme } from "./theme.mjs";
+import { theme, colorNames } from "./theme.mjs";
 import { variants } from "./variants.mjs";
 export { preflights } from "./preflights.mjs";
 export { theme, colors } from "./theme.mjs";
 export { parseColor } from "./utils.mjs";
+
 export const presetMini = (options = {}) => {
-  options.dark = options.dark ?? "class";
+  options.dark = options.dark ?? "media";
   options.attributifyPseudo = options.attributifyPseudo ?? false;
-  options.preflight = options.preflight ?? true;
+  options.preflight = options.preflight ?? !options.jit;
+  options.variablePrefix = 'p-'
+  const base = buildBase()
+
   return {
     name: "@unocss/preset-mini",
-    safelist: ['p-32'],
-    blocklist: ['p-8'],
+    safelist: options.base ? base : [],
+    blocklist: options.jit ? base : [],
     theme,
     rules,
     variants: variants(options),
@@ -32,3 +36,30 @@ function VarPrefixPostprocessor(prefix) {
     });
   };
 }
+
+function map(a, b, join = '-') {
+  const classes = []
+  for (const n of a) {
+    for (const t of b)
+      classes.push(n + join + t)
+  }
+  return classes
+}
+
+const makeResponsive = arr => map(Object.keys(theme.breakpoints), arr, ':')
+
+function buildBase() {
+  const list = []
+  const colors = colorNames()
+  const colorClasses = map(['bg', 'text'], colors)
+  const spacingDirections = ['', 'b','l','t','r','x','y']
+  const spacingTypes = map(['p','m'], spacingDirections,'')
+  const spacings = map(spacingTypes, Object.keys(theme.spacing))
+  list.push(makeResponsive(spacings))
+  list.push(spacings)
+  list.push(colorClasses)
+  const result = list.flat(Infinity)
+  return result
+}
+
+// buildBase()

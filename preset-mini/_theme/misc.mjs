@@ -1,9 +1,7 @@
 export const breakpoints = {
-  "sm": "640px",
+  "sm": "480px",
   "md": "768px",
-  "lg": "1024px",
-  "xl": "1280px",
-  "2xl": "1536px"
+  "lg": "990px",
 };
 export const verticalBreakpoints = { ...breakpoints };
 export const lineWidth = {
@@ -11,20 +9,30 @@ export const lineWidth = {
   none: "0px"
 };
 export const spacing = {
-  "DEFAULT": "1rem",
-  "none": "0rem",
-  "xs": "0.75rem",
-  "sm": "0.875rem",
-  "lg": "1.125rem",
-  "xl": "1.25rem",
-  "2xl": "1.5rem",
-  "3xl": "1.875rem",
-  "4xl": "2.25rem",
-  "5xl": "3rem",
-  "6xl": "3.75rem",
-  "7xl": "4.5rem",
-  "8xl": "6rem",
-  "9xl": "8rem"
+  0: '0',
+  1: '1px',
+  2: '2px',
+  4: '4px',
+  6: '6px',
+  8: '8px',
+  10: '10px',
+  12: '12px',
+  14: '14px',
+  16: '16px',
+  20: '20px',
+  24: '24px',
+  28: '28px',
+  32: '32px',
+  40: '40px',
+  44: '44px',
+  48: '48px',
+  56: '56px',
+  64: '64px',
+  80: '80px',
+  96: '96px',
+  112: '112px',
+  128: '128px',
+  144: '144px',
 };
 export const duration = {
   DEFAULT: "150ms",
@@ -39,15 +47,12 @@ export const duration = {
   1e3: "1000ms"
 };
 export const borderRadius = {
-  "DEFAULT": "0.25rem",
-  "none": "0rem",
-  "sm": "0.125rem",
-  "md": "0.375rem",
-  "lg": "0.5rem",
-  "xl": "0.75rem",
-  "2xl": "1rem",
-  "3xl": "1.5rem",
-  "full": "9999px"
+  0: '0px',
+  2: '2px',
+  4: '4px',
+  8: '8px',
+  16: '16px',
+  full: '9999px',
 };
 export const boxShadow = {
   "DEFAULT": ["var(--un-shadow-inset) 0 1px 3px 0 rgba(0,0,0,0.1)", "var(--un-shadow-inset) 0 1px 2px -1px rgba(0,0,0,0.1)"],
