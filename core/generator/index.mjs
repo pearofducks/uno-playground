@@ -1,9 +1,11 @@
 import { createNanoEvents } from "../utils/events.mjs";
 import { resolveConfig } from "../config.mjs";
 import { CONTROL_SHORTCUT_NO_MERGE, TwoKeyMap, e, entriesToCss, expandVariantGroup, isRawUtil, isStaticShortcut, isString, noop, normalizeCSSEntries, normalizeCSSValues, notNull, uniq, warnOnce } from "../utils/index.mjs";
-import pkg from "../../package.json" assert { type: 'json' };
 import { LAYER_DEFAULT, LAYER_PREFLIGHTS } from "../constants.mjs";
-const { version } = pkg
+// FIXME
+// import pkg from "../../package.json" assert { type: 'json' };
+// const { version } = pkg
+const version = '1.0.0'
 
 export class UnoGenerator {
   version = version;
