@@ -1,5 +1,5 @@
-import { createGenerator, escapeSelector } from './core/index.js'
-import presetMini from './preset-mini/index.mjs'
+import { createGenerator, escapeSelector } from '@pearofducks/duo-core'
+import presetMini from '@pearofducks/duo-preset-fabric'
 
 const uno = createGenerator({
   presets: [

@@ -6,7 +6,7 @@ import { fonts, tabSizes, textIndents, textShadows, textStrokes } from "./typogr
 import { gaps } from "./gap.mjs";
 import { grids } from "./grid.mjs";
 import { overflows } from "./layout.mjs";
-import { alignments, boxSizing, floats, insets, justifies, orders, placements, positions, zIndexes } from "./position.mjs";
+import { alignments, boxSizing, insets, justifies, orders, placements, positions, zIndexes } from "./position.mjs";
 import { rings } from "./ring.mjs";
 import { boxShadows } from "./shadow.mjs";
 import { aspectRatio, sizes } from "./size.mjs";
@@ -67,7 +67,7 @@ export const rules = [
   alignments,
   placements,
   insets,
-  floats,
+  // floats,
   zIndexes,
   boxSizing,
   transitions,

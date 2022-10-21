@@ -11,5 +11,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@pearofducks/duo-core": "workspace:*",
+    "@pearofducks/duo-preset-fabric": "workspace:*"
+  }
 }

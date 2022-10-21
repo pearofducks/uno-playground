@@ -3,13 +3,18 @@ lockfileVersion: 5.4
 importers:
 
   .:
-    specifiers: {}
+    specifiers:
+      '@pearofducks/duo-core': workspace:*
+      '@pearofducks/duo-preset-fabric': workspace:*
+    devDependencies:
+      '@pearofducks/duo-core': link:core
+      '@pearofducks/duo-preset-fabric': link:preset-mini
 
   core:
     specifiers: {}
 
   preset-mini:
     specifiers:
-      '@unocss/core': workspace:*
+      '@unocss/core': workspace:@pearofducks/duo-core@*
     dependencies:
       '@unocss/core': link:../core

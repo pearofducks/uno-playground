@@ -1,5 +1,5 @@
 {
-  "name": "@unocss/preset-mini",
+  "name": "@pearofducks/duo-preset-fabric",
   "version": "1.0.0",
   "description": "",
   "main": "index.mjs",
@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@unocss/core": "workspace:*"
+    "@unocss/core": "workspace:@pearofducks/duo-core@*"
   }
 }
