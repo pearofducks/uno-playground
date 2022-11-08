@@ -17,6 +17,6 @@ const classes = Object.values(components).map(e => {
   return e.split(/\s/)
 }).flat(Infinity)
 
-const result = await uno.generate(classes, { preflights: false })
+const result = await uno.generate(classes, { preflights: true })
 // const result = await uno.generate(['sm:bg-blue-600', 'sm:p-16'])
 console.log(result.css)
