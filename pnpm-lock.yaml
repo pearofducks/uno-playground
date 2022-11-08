@@ -3,7 +3,10 @@ lockfileVersion: 5.4
 importers:
 
   .:
-    specifiers: {}
+    specifiers:
+      '@fabric-ds/css': ^1.1.10
+    dependencies:
+      '@fabric-ds/css': 1.1.10
 
   core:
     specifiers: {}
@@ -13,3 +16,21 @@ importers:
       '@unocss/core': workspace:*
     dependencies:
       '@unocss/core': link:../core
+
+packages:
+
+  /@fabric-ds/css/1.1.10:
+    resolution: {integrity: sha512-yO0XPEAYTv6IiQFwAembc0ewqhios3PgqYTZVEdQJh4iTsReQMf2NS59VcrdP2zC/sCdtjIsdN6YGQqBzIaKYw==}
+    dependencies:
+      lit-html: 2.4.0
+    dev: false
+
+  /@types/trusted-types/2.0.2:
+    resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
+    dev: false
+
+  /lit-html/2.4.0:
+    resolution: {integrity: sha512-G6qXu4JNUpY6aaF2VMfaszhO9hlWw0hOTRFDmuMheg/nDYGB+2RztUSOyrzALAbr8Nh0Y7qjhYkReh3rPnplVg==}
+    dependencies:
+      '@types/trusted-types': 2.0.2
+    dev: false
