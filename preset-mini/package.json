@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@unocss/core": "workspace:@pearofducks/duo-core@*"
+    "@unocss/core": "workspace:@pearofducks/duo-core@*",
+    "mini-svg-data-uri": "^1.4.4"
   }
 }

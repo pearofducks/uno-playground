@@ -16,5 +16,14 @@ importers:
   preset-mini:
     specifiers:
       '@unocss/core': workspace:@pearofducks/duo-core@*
+      mini-svg-data-uri: ^1.4.4
     dependencies:
       '@unocss/core': link:../core
+      mini-svg-data-uri: 1.4.4
+
+packages:
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: false
